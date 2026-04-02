@@ -17,9 +17,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(108,99,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(108,99,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
 .app{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:24px;}
 
-/* SETUP MODAL */
+/* ===== SETUP MODAL ===== */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:2.5rem;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:2.5rem;width:100%;max-width:600px;max-height:92vh;overflow-y:auto;}
 .modal h2{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:0.4rem;}
 .modal h2 span{color:var(--accent);}
 .modal p{color:var(--muted2);font-size:0.9rem;margin-bottom:2rem;}
@@ -27,51 +27,57 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .form-label{font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted2);margin-bottom:0.5rem;display:block;}
 .form-input{width:100%;padding:0.8rem 1rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;color:var(--text);font-size:0.95rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;}
 .form-input:focus{border-color:var(--accent);}
-.courses-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;}
-.course-chip{padding:0.7rem 1rem;background:var(--surface2);border:2px solid var(--border2);border-radius:10px;cursor:pointer;transition:all 0.15s;font-size:0.82rem;font-weight:600;text-align:center;user-select:none;}
-.course-chip:hover{border-color:var(--accent);color:var(--accent);}
-.course-chip.selected{border-color:var(--accent);background:rgba(108,99,255,0.12);color:var(--accent);}
-.course-chip.selected.cma{border-color:var(--accent2);background:rgba(0,212,170,0.12);color:var(--accent2);}
-.course-chip.selected.cs{border-color:var(--gold);background:rgba(255,209,102,0.12);color:var(--gold);}
-.btn-save{width:100%;padding:1rem;background:var(--accent);color:white;border:none;border-radius:10px;font-size:1rem;font-weight:700;font-family:'Syne',sans-serif;cursor:pointer;margin-top:1rem;transition:all 0.15s;}
-.btn-save:hover{filter:brightness(1.1);transform:translateY(-1px);}
 .err{color:var(--warn);font-size:0.8rem;margin-top:0.4rem;display:none;}
 
-/* HEADER */
+/* ===== SUBJECT BUILDER ===== */
+.subject-builder{background:var(--surface2);border:1px solid var(--border2);border-radius:14px;padding:1.2rem;margin-bottom:1rem;}
+.builder-row{display:flex;gap:0.6rem;align-items:center;margin-bottom:0.8rem;flex-wrap:wrap;}
+.builder-row .form-input{flex:1;min-width:150px;padding:0.65rem 0.9rem;font-size:0.85rem;}
+.btn-icon{background:var(--surface);border:1px solid var(--border2);border-radius:8px;color:var(--muted2);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;flex-shrink:0;transition:all 0.15s;}
+.btn-icon:hover{border-color:var(--accent);color:var(--accent);}
+.btn-icon.del:hover{border-color:var(--warn);color:var(--warn);}
+.subject-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;}
+.subject-badge{font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:700;color:var(--accent);}
+.chapters-list{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.7rem;padding-left:0.5rem;}
+.chapter-row{display:flex;gap:0.5rem;align-items:center;}
+.chapter-row .form-input{flex:1;padding:0.5rem 0.8rem;font-size:0.82rem;}
+.btn-add-chapter{display:flex;align-items:center;gap:0.4rem;background:transparent;border:1px dashed var(--border2);border-radius:8px;color:var(--muted);font-size:0.78rem;padding:0.45rem 0.9rem;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;width:100%;}
+.btn-add-chapter:hover{border-color:var(--accent2);color:var(--accent2);}
+.btn-add-subject{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;padding:0.75rem;background:transparent;border:2px dashed var(--border2);border-radius:12px;color:var(--muted2);font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;margin-bottom:1rem;}
+.btn-add-subject:hover{border-color:var(--accent);color:var(--accent);}
+.btn-save{width:100%;padding:1rem;background:var(--accent);color:white;border:none;border-radius:10px;font-size:1rem;font-weight:700;font-family:'Syne',sans-serif;cursor:pointer;margin-top:0.5rem;transition:all 0.15s;}
+.btn-save:hover{filter:brightness(1.1);transform:translateY(-1px);}
+
+/* ===== HEADER ===== */
 .header{background:linear-gradient(135deg,#0d0d18 0%,#12122a 50%,#0d0d18 100%);border:1px solid var(--border2);border-radius:20px;padding:2rem 2.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
 .header::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(108,99,255,0.15) 0%,transparent 70%);pointer-events:none;}
 .header-left{position:relative;z-index:1;}
 .header h1{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:0.3rem;}
 .header h1 span{color:var(--accent);}
-.header-chips{display:flex;gap:0.6rem;flex-wrap:wrap;}
-.chip{padding:3px 12px;border-radius:20px;font-size:0.76rem;font-weight:600;}
-.chip.ca{background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.25);color:var(--accent);}
-.chip.cma{background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.25);color:var(--accent2);}
-.chip.cs{background:rgba(255,209,102,0.1);border:1px solid rgba(255,209,102,0.25);color:var(--gold);}
-.btn-settings{padding:0.6rem 1.2rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;color:var(--muted2);font-size:0.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;position:relative;z-index:1;}
+.header-sub{font-size:0.82rem;color:var(--muted2);margin-top:0.2rem;}
+.header-actions{display:flex;gap:0.6rem;position:relative;z-index:1;}
+.btn-settings{padding:0.6rem 1.2rem;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;color:var(--muted2);font-size:0.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
 .btn-settings:hover{border-color:var(--accent);color:var(--accent);}
 
-/* KPI */
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;}
+/* ===== KPI ===== */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;}
 .kpi{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.4rem;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
 .kpi:hover{border-color:var(--border2);transform:translateY(-2px);}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.kpi.kca::before{background:linear-gradient(90deg,var(--accent),transparent);}
-.kpi.kcma::before{background:linear-gradient(90deg,var(--accent2),transparent);}
-.kpi.kcs::before{background:linear-gradient(90deg,var(--gold),transparent);}
-.kpi.ktod::before{background:linear-gradient(90deg,var(--warn),transparent);}
+.kpi.k1::before{background:linear-gradient(90deg,var(--accent),transparent);}
+.kpi.k2::before{background:linear-gradient(90deg,var(--accent2),transparent);}
+.kpi.k3::before{background:linear-gradient(90deg,var(--warn),transparent);}
 .kpi-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;margin-bottom:0.5rem;}
 .kpi-value{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;line-height:1;}
-.kpi.kca .kpi-value{color:var(--accent);}
-.kpi.kcma .kpi-value{color:var(--accent2);}
-.kpi.kcs .kpi-value{color:var(--gold);}
-.kpi.ktod .kpi-value{color:var(--warn);}
+.kpi.k1 .kpi-value{color:var(--accent);}
+.kpi.k2 .kpi-value{color:var(--accent2);}
+.kpi.k3 .kpi-value{color:var(--warn);}
 .kpi-sub{font-size:0.73rem;color:var(--muted);margin-top:0.3rem;}
 
-/* MAIN GRID */
+/* ===== MAIN GRID ===== */
 .main-grid{display:grid;grid-template-columns:1fr 360px;gap:1.5rem;margin-bottom:2rem;}
 
-/* POMODORO */
+/* ===== POMODORO ===== */
 .pomo-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;}
 .section-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:1.2rem;display:flex;align-items:center;gap:0.5rem;}
 .timer-wrap{text-align:center;padding:1rem 0 1.2rem;}
@@ -88,7 +94,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .pdot.wk.active{background:var(--accent);}
 .pdot.bk.active{background:var(--accent2);}
 .pdot.done{opacity:0.35;}
-.selectors{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;margin-bottom:1rem;}
+.selectors{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem;}
 .sel{padding:0.6rem 0.8rem;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:0.8rem;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;transition:border-color 0.2s;}
 .sel:focus{border-color:var(--accent);}
 .sel option{background:var(--surface2);}
@@ -99,7 +105,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn-pause{background:var(--warn);color:white;}
 .btn-sm{background:var(--surface2);border:1px solid var(--border2);color:var(--muted2);}
 
-/* LOG */
+/* ===== LOG ===== */
 .log-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;display:flex;flex-direction:column;}
 .log-list{flex:1;overflow-y:auto;max-height:380px;}
 .log-list::-webkit-scrollbar{width:3px;}
@@ -107,8 +113,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .log-item{padding:0.8rem 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:8px 1fr auto;gap:0.8rem;align-items:center;}
 .log-item:last-child{border-bottom:none;}
 .log-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;}
-.log-dot.cma{background:var(--accent2);}
-.log-dot.cs{background:var(--gold);}
 .log-subj{font-size:0.8rem;font-weight:600;}
 .log-chap{font-size:0.7rem;color:var(--muted);margin-top:1px;}
 .log-date{font-size:0.68rem;color:var(--muted);}
@@ -116,29 +120,19 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .log-empty{text-align:center;padding:2.5rem 1rem;color:var(--muted);font-size:0.82rem;}
 .log-empty .big{font-size:2.2rem;margin-bottom:0.5rem;}
 
-/* SUBJECTS */
-.exam-group{margin-bottom:2rem;}
-.exam-label{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:4px 14px;border-radius:6px;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;}
-.exam-label.ca{color:var(--accent);background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.2);}
-.exam-label.cma{color:var(--accent2);background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.2);}
-.exam-label.cs{color:var(--gold);background:rgba(255,209,102,0.1);border:1px solid rgba(255,209,102,0.2);}
-.subjects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem;}
+/* ===== SUBJECTS SECTION ===== */
+.subjects-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;}
+.subjects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem;margin-bottom:2rem;}
 .subject-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.3rem;transition:all 0.2s;}
 .subject-card:hover{border-color:var(--border2);transform:translateY(-2px);}
 .subject-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.7rem;cursor:pointer;}
 .subject-name{font-size:0.87rem;font-weight:600;flex:1;line-height:1.3;}
-.subject-pct{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;line-height:1;margin-left:0.4rem;}
-.subject-pct.ca{color:var(--accent);}
-.subject-pct.cma{color:var(--accent2);}
-.subject-pct.cs{color:var(--gold);}
+.subject-pct{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;line-height:1;margin-left:0.4rem;color:var(--accent);}
 .expand-icon{font-size:0.72rem;color:var(--muted);margin-left:2px;transition:transform 0.2s;}
 .subject-card.expanded .expand-icon{transform:rotate(180deg);}
 .prog-bar{height:4px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:0.5rem;}
-.prog-fill{height:100%;border-radius:2px;transition:width 0.4s cubic-bezier(.4,0,.2,1);}
-.prog-fill.ca{background:linear-gradient(90deg,#4c44dd,#6c63ff);}
-.prog-fill.cma{background:linear-gradient(90deg,#00b890,#00d4aa);}
-.prog-fill.cs{background:linear-gradient(90deg,#e6b800,#ffd166);}
-.subject-meta{font-size:0.7rem;color:var(--muted);display:flex;justify-content:space-between;}
+.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#4c44dd,#6c63ff);transition:width 0.4s cubic-bezier(.4,0,.2,1);}
+.subject-meta{font-size:0.7rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;}
 .chapters-panel{display:none;margin-top:0.9rem;padding-top:0.9rem;border-top:1px solid var(--border);}
 .subject-card.expanded .chapters-panel{display:block;}
 .chapter-item{display:flex;align-items:center;gap:0.65rem;padding:0.42rem 0;cursor:pointer;border-radius:6px;transition:background 0.1s;}
@@ -147,8 +141,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .chapter-item.done .chk{background:var(--accent2);border-color:var(--accent2);color:white;}
 .chapter-item.done .chap-name{color:var(--muted);text-decoration:line-through;}
 .chap-name{font-size:0.78rem;color:var(--muted2);transition:color 0.15s;}
+.no-subjects{text-align:center;padding:3rem 1rem;color:var(--muted);border:1px dashed var(--border2);border-radius:16px;}
+.no-subjects .big{font-size:2.5rem;margin-bottom:0.7rem;}
 
-/* PIP */
+/* ===== PIP ===== */
 .pip{position:fixed;top:20px;right:20px;z-index:9999;width:250px;background:var(--surface);border:2px solid var(--accent);border-radius:16px;padding:1.2rem 1.4rem;box-shadow:0 20px 60px rgba(0,0,0,0.6);display:none;flex-direction:column;align-items:center;gap:0.7rem;}
 .pip.visible{display:flex;}
 .pip-close{position:absolute;top:8px;right:12px;background:transparent;border:none;color:var(--muted);font-size:1rem;cursor:pointer;}
@@ -157,23 +153,23 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .pip-sub{font-size:0.78rem;color:var(--muted);text-align:center;}
 .pip-pause{width:100%;padding:0.55rem;background:rgba(255,107,107,0.15);border:1px solid rgba(255,107,107,0.3);border-radius:8px;color:var(--warn);font-size:0.78rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
 
-/* TOAST */
+/* ===== TOAST ===== */
 .toast{position:fixed;bottom:28px;right:28px;background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:0.9rem 1.3rem;font-size:0.82rem;box-shadow:0 20px 40px rgba(0,0,0,0.5);transform:translateY(100px);opacity:0;transition:all 0.3s cubic-bezier(.4,0,.2,1);z-index:99999;max-width:300px;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast-title{font-weight:700;margin-bottom:0.2rem;color:var(--accent2);font-family:'Syne',sans-serif;}
 .toast-body{color:var(--muted2);}
 
-@media(max-width:1100px){.main-grid{grid-template-columns:1fr;}.kpi-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:600px){.app{padding:14px;}.header{padding:1.3rem;}.header h1{font-size:1.5rem;}.kpi-grid{grid-template-columns:repeat(2,1fr);}.selectors{grid-template-columns:1fr;}.courses-grid{grid-template-columns:1fr;}}
+@media(max-width:1100px){.main-grid{grid-template-columns:1fr;}.kpi-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:600px){.app{padding:14px;}.header{padding:1.3rem;}.header h1{font-size:1.5rem;}.kpi-grid{grid-template-columns:1fr 1fr;}.selectors{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<!-- SETUP MODAL -->
+<!-- SETUP / SETTINGS MODAL -->
 <div class="modal-overlay" id="setupModal">
   <div class="modal">
-    <h2>Welcome to <span>Study Tracker</span> 👋</h2>
-    <p>Set up your profile once — you can always change it later from the ⚙ Settings button.</p>
+    <h2>Welcome to <span>Study Tracker</span> \ud83d\udc4b</h2>
+    <p id="modalDesc">Set up your profile and add your subjects with chapters. You can edit this any time from \u2699 Settings.</p>
 
     <div class="form-group">
       <label class="form-label">Your Full Name</label>
@@ -182,22 +178,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     </div>
 
     <div class="form-group">
-      <label class="form-label">Select Your Courses (pick all that apply)</label>
-      <div class="courses-grid" id="courseGrid">
-        <div class="course-chip ca" data-course="CA Foundation">CA Foundation</div>
-        <div class="course-chip ca" data-course="CA Intermediate">CA Intermediate</div>
-        <div class="course-chip ca" data-course="CA Final">CA Final</div>
-        <div class="course-chip cma" data-course="CMA Foundation">CMA Foundation</div>
-        <div class="course-chip cma" data-course="CMA Intermediate">CMA Intermediate</div>
-        <div class="course-chip cma" data-course="CMA Final">CMA Final</div>
-        <div class="course-chip cs" data-course="CS CSEET">CS CSEET</div>
-        <div class="course-chip cs" data-course="CS Executive">CS Executive</div>
-        <div class="course-chip cs" data-course="CS Professional">CS Professional</div>
-      </div>
-      <div class="err" id="courseErr">Please select at least one course.</div>
+      <label class="form-label">Subjects &amp; Chapters</label>
+      <div id="subjectBuilderList"></div>
+      <button class="btn-add-subject" onclick="addSubjectBlock()">\uff0b Add Subject</button>
+      <div class="err" id="subjectErr">Please add at least one subject with one chapter.</div>
     </div>
 
-    <button class="btn-save" onclick="saveSetup()">Save & Start Tracking →</button>
+    <button class="btn-save" onclick="saveSetup()">Save &amp; Start Tracking \u2192</button>
   </div>
 </div>
 
@@ -206,10 +193,12 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <!-- HEADER -->
   <header class="header">
     <div class="header-left">
-      <h1>📚 <span id="headerName">Study</span> Tracker</h1>
-      <div class="header-chips" id="headerChips"></div>
+      <h1>\ud83d\udcda <span id="headerName">Study</span> Tracker</h1>
+      <div class="header-sub" id="headerSub"></div>
     </div>
-    <button class="btn-settings" onclick="openSettings()">⚙ Settings</button>
+    <div class="header-actions">
+      <button class="btn-settings" onclick="openSettings()">\u2699 Settings</button>
+    </div>
   </header>
 
   <!-- KPI -->
@@ -218,7 +207,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   <!-- MAIN GRID -->
   <div class="main-grid">
     <div class="pomo-card">
-      <div class="section-title">⏱ Pomodoro Timer</div>
+      <div class="section-title">\u23f1 Pomodoro Timer</div>
       <div class="timer-wrap">
         <div class="timer-ring">
           <svg viewBox="0 0 180 180" width="170" height="170">
@@ -237,39 +226,41 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         </div>
       </div>
       <div class="selectors">
-        <select class="sel" id="courseSel"></select>
-        <select class="sel" id="subSel"><option value="">— Subject —</option></select>
-        <select class="sel" id="chapSel"><option value="">— Chapter —</option></select>
+        <select class="sel" id="subSel"><option value="">\u2014 Subject \u2014</option></select>
+        <select class="sel" id="chapSel"><option value="">\u2014 Chapter \u2014</option></select>
       </div>
       <div class="pomo-btns">
-        <button class="btn btn-start" id="startBtn" onclick="startTimer()">▶ Start 50 min</button>
-        <button class="btn btn-pause" onclick="pauseTimer()">⏸ Pause</button>
-        <button class="btn btn-sm" onclick="resetTimer()">↺ Reset</button>
-        <button class="btn btn-sm" onclick="togglePip()">🖼 PiP</button>
-        <button class="btn btn-sm" onclick="clearData()" style="color:var(--warn);font-size:0.74rem;">🗑 Clear</button>
+        <button class="btn btn-start" id="startBtn" onclick="startTimer()">\u25b6 Start 50 min</button>
+        <button class="btn btn-pause" onclick="pauseTimer()">\u23f8 Pause</button>
+        <button class="btn btn-sm" onclick="resetTimer()">\u21ba Reset</button>
+        <button class="btn btn-sm" onclick="togglePip()">\ud83d\uddbc PiP</button>
+        <button class="btn btn-sm" onclick="clearData()" style="color:var(--warn);font-size:0.74rem;">\ud83d\uddd1 Clear</button>
       </div>
     </div>
 
     <div class="log-card">
-      <div class="section-title">📋 Recent Sessions</div>
+      <div class="section-title">\ud83d\udccb Recent Sessions</div>
       <div class="log-list" id="logList">
-        <div class="log-empty"><div class="big">🎯</div>No sessions yet.<br>Start your first Pomodoro!</div>
+        <div class="log-empty"><div class="big">\ud83c\udfaf</div>No sessions yet.<br>Start your first Pomodoro!</div>
       </div>
     </div>
   </div>
 
   <!-- SUBJECTS -->
+  <div class="subjects-header">
+    <div class="section-title" style="margin:0">\ud83d\udcd6 Subjects</div>
+  </div>
   <div id="subjectsRoot"></div>
 
 </div>
 
 <!-- PiP -->
 <div class="pip" id="pipEl">
-  <button class="pip-close" onclick="togglePip()">✕</button>
+  <button class="pip-close" onclick="togglePip()">\u2715</button>
   <div class="pip-time" id="pipTime">50:00</div>
   <div class="pip-phase" id="pipPhase">Work</div>
-  <div class="pip-sub" id="pipSub">—</div>
-  <button class="pip-pause" onclick="pauseTimer()">⏸ Pause</button>
+  <div class="pip-sub" id="pipSub">\u2014</div>
+  <button class="pip-pause" onclick="pauseTimer()">\u23f8 Pause</button>
 </div>
 
 <div class="toast" id="toast">
@@ -278,106 +269,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 </div>
 
 <script>
-// ===================== CURRICULUM =====================
-const CURRICULUM = {
-  'CA Foundation': {
-    color:'ca',
-    subjects: {
-      'Principles of Accounting': ['Introduction to Accounting','Journal & Ledger','Trial Balance','Final Accounts','Depreciation','Rectification of Errors','Bank Reconciliation','Bills of Exchange'],
-      'Business Laws': ['Indian Contract Act','Sale of Goods Act','Indian Partnership Act','LLP Act','Negotiable Instruments Act'],
-      'Business Maths & Statistics': ['Ratio & Proportion','Indices','Logarithms','Equations','Matrices','Statistics','Probability'],
-      'Business Economics': ['Nature of Economics','Demand & Supply','Market Forms','National Income','Money & Banking','Business Cycles']
-    }
-  },
-  'CA Intermediate': {
-    color:'ca',
-    subjects: {
-      'Advanced Accounting': ['AS 1–10','AS 11–20','Partnership Accounts','Amalgamations','Branch Accounts','Dept Accounts','Foreign Exchange','Consolidated FS'],
-      'Corporate & Other Laws': ['Companies Act Basics','Board & Meetings','Share Capital','Debentures','Winding Up','Contract Act','Negotiable Instruments'],
-      'Taxation': ['Residential Status','Salaries','House Property','PGBP','Capital Gains','Other Sources','Deductions','GST & Customs'],
-      'Cost & Management Accounting': ['Cost Sheet','Material Cost','Labour Cost','Overheads','ABC Costing','Marginal Costing','Standard Costing','Budgetary Control'],
-      'Auditing & Ethics': ['Nature of Auditing','Audit Planning','Internal Control','Vouching','Verification','Company Audit','Special Audits','SA Standards','Ethics'],
-      'FM & Strategic Management': ['Financial Management','Time Value of Money','Capital Budgeting','Cost of Capital','Leverage','Dividend Policy','Working Capital','Strategic Analysis']
-    }
-  },
-  'CA Final': {
-    color:'ca',
-    subjects: {
-      'Financial Reporting': ['Ind AS 1–10','Ind AS 11–20','Ind AS 21–40','Group Accounting','Mergers & Demergers'],
-      'Advanced FM': ['Portfolio Theory','CAPM','Derivatives','Foreign Exchange','Corporate Valuation'],
-      'Advanced Auditing': ['Risk-Based Auditing','Group Audits','Bank Audits','CARO','Forensic Audit'],
-      'Corporate & Economic Laws': ['SEBI Regulations','Competition Act','Insolvency Code','FEMA','Anti-money Laundering'],
-      'Strategic Cost & Performance': ['Activity Based Management','Transfer Pricing','Performance Measurement','Decision Making'],
-      'Direct Tax & International Tax': ['Business Income','PGBP Deductions','Transfer Pricing','GAAR','International Tax','DTAA']
-    }
-  },
-  'CMA Foundation': {
-    color:'cma',
-    subjects: {
-      'Fundamentals of Accounting': ['Double Entry System','Final Accounts','Depreciation','Bank Reconciliation','Inventories'],
-      'Fundamentals of Law & Ethics': ['Contract Act','Negotiable Instruments','Business Ethics'],
-      'Fundamentals of Maths & Stats': ['Arithmetic','Algebra','Statistics','Probability'],
-      'Fundamentals of Business Economics': ['Demand & Supply','Production Theory','Market Structures','National Income']
-    }
-  },
-  'CMA Intermediate': {
-    color:'cma',
-    subjects: {
-      'Financial Accounting': ['Accounting Standards','Company Accounts','Special Transactions','Partnership Accounts'],
-      'Business Laws & Ethics': ['Companies Act','Contract Act','Negotiable Instruments','Ethics & Governance'],
-      'Direct & Indirect Taxation': ['Income Tax Basics','Income Heads','Deductions','GST & Customs'],
-      'Cost Accounting': ['Cost Concepts','Material Cost','Labour Cost','Overheads','Cost Sheet','Standard Costing'],
-      'Corporate Accounting & Audit': ['Advanced Company Accounts','Auditing Standards','Company Audit'],
-      'Financial Management & BDA': ['FM Concepts','Capital Budgeting','Risk Analysis','Business Data Analytics']
-    }
-  },
-  'CMA Final': {
-    color:'cma',
-    subjects: {
-      'Corporate Financial Reporting': ['Ind AS','Consolidated FS','Mergers','Segment Reporting'],
-      'Strategic Financial Management': ['Portfolio Management','Derivatives','Valuation','International Finance'],
-      'Strategic Cost Management': ['Decision Making','Lean Costing','Transfer Pricing','Performance Evaluation'],
-      'Direct Tax & International Tax': ['Corporate Taxation','Transfer Pricing','GAAR','DTAA'],
-      'Corporate Laws & Compliance': ['SEBI','Insolvency Code','FEMA','Competition Act'],
-      'Strategic Management': ['Porter\'s Five Forces','BCG Matrix','Competitive Strategy','Balanced Scorecard']
-    }
-  },
-  'CS CSEET': {
-    color:'cs',
-    subjects: {
-      'Business Communication': ['Letter Writing','Report Writing','Presentation Skills','Group Discussion'],
-      'Legal Aptitude & Logical Reasoning': ['Legal Aptitude','Logical Reasoning','Analytical Ability'],
-      'Economic & Business Environment': ['Indian Economy','Business Environment','Economic Policy'],
-      'Current Affairs': ['National Affairs','International Affairs','Financial Markets','Corporate Developments']
-    }
-  },
-  'CS Executive': {
-    color:'cs',
-    subjects: {
-      'Jurisprudence & Acts': ['General Principles of Law','Contract Act','Torts','Arbitration'],
-      'Company Law': ['Incorporation','Share Capital','Meetings','Directors','Winding Up'],
-      'Setting Up of Business': ['Business Structures','Start-up India','Foreign Collaboration','NCLT Procedures'],
-      'Financial & Strategic Mgmt': ['FM Basics','Risk Management','Strategic Analysis','Corporate Planning'],
-      'Tax Laws': ['Income Tax','GST','Customs','Tax Planning'],
-      'Corporate & Management Accounting': ['Financial Statements','Marginal Costing','Budgeting','Standard Costing']
-    }
-  },
-  'CS Professional': {
-    color:'cs',
-    subjects: {
-      'Governance, Risk & Compliance': ['Corporate Governance','Risk Management','Compliance Framework','Board Processes'],
-      'Advanced Tax Laws': ['Corporate Taxation','International Tax','GST Advanced','Indirect Tax Planning'],
-      'Drafting, Pleadings & Appearances': ['Drafting Skills','NCLT Pleadings','Company Law Compliance','Secretarial Practice'],
-      'Corporate Restructuring': ['Mergers & Amalgamations','Demergers','Valuations','SEBI Regulations'],
-      'Insolvency Law & Practice': ['IBC 2016','CIRP Process','Liquidation','Cross-Border Insolvency'],
-      'Elective': ['Banking Law','Insurance Law','Intellectual Property','Competition Law']
-    }
-  }
-};
-
-const COLOR_CLASS = {};
-Object.keys(CURRICULUM).forEach(c => COLOR_CLASS[c] = CURRICULUM[c].color);
-
+// ===================== PHASES =====================
 const PHASES = [
   [50*60,'50 min Work #1','work'],[10*60,'10 min Break','break'],
   [50*60,'50 min Work #2','work'],[10*60,'10 min Break','break'],
@@ -386,378 +278,11 @@ const PHASES = [
 const RING_CIRC = 2 * Math.PI * 80;
 
 // ===================== STATE =====================
-let profile = JSON.parse(localStorage.getItem('gk_profile') || 'null');
-let sessions = JSON.parse(localStorage.getItem('gk_sessions') || '[]');
+let profile   = JSON.parse(localStorage.getItem('gk_profile') || 'null');
+let sessions  = JSON.parse(localStorage.getItem('gk_sessions') || '[]');
 let completions = JSON.parse(localStorage.getItem('gk_completions') || '{}');
 
-let timerId=null, timerRunning=false, phaseIdx=0;
-let timerVal=PHASES[0][0], totalForPhase=PHASES[0][0];
-let selCourse='', selSub='', selChap='';
-let selectedCourses = new Set();
+// profile shape:
+// { name: "...", subjects: [ { name: "Auditing", chapters: ["Ch1","Ch2"] }, ... ] }
 
-// ===================== SETUP MODAL =====================
-document.querySelectorAll('.course-chip').forEach(el => {
-  el.addEventListener('click', function() {
-    const c = this.dataset.course;
-    if (selectedCourses.has(c)) { selectedCourses.delete(c); this.classList.remove('selected'); }
-    else { selectedCourses.add(c); this.classList.add('selected'); }
-  });
-});
-
-function saveSetup() {
-  const name = document.getElementById('nameInput').value.trim();
-  if (!name) { document.getElementById('nameErr').style.display='block'; return; }
-  document.getElementById('nameErr').style.display='none';
-  if (!selectedCourses.size) { document.getElementById('courseErr').style.display='block'; return; }
-  document.getElementById('courseErr').style.display='none';
-
-  profile = { name, courses: [...selectedCourses] };
-  localStorage.setItem('gk_profile', JSON.stringify(profile));
-  document.getElementById('setupModal').style.display='none';
-  document.getElementById('mainApp').style.display='block';
-  bootApp();
-}
-
-function openSettings() {
-  // Re-populate modal with current values
-  document.getElementById('nameInput').value = profile.name;
-  selectedCourses = new Set(profile.courses);
-  document.querySelectorAll('.course-chip').forEach(el => {
-    el.classList.toggle('selected', selectedCourses.has(el.dataset.course));
-  });
-  document.getElementById('setupModal').style.display='flex';
-}
-
-// ===================== BOOT =====================
-function bootApp() {
-  renderHeader();
-  renderKPI();
-  renderCourseDropdown();
-  bindDropdowns();
-  renderSubjects();
-  renderLog();
-  updateTimerDisplay();
-  updateRing();
-  updatePhaseDots();
-}
-
-function renderHeader() {
-  document.getElementById('headerName').textContent = profile.name.split(' ')[0] + "'s";
-  const chips = document.getElementById('headerChips');
-  chips.innerHTML = profile.courses.map(c => {
-    const cls = COLOR_CLASS[c] || 'ca';
-    return `<span class="chip ${cls}">${c}</span>`;
-  }).join('');
-}
-
-// ===================== KPI =====================
-function renderKPI() {
-  const grid = document.getElementById('kpiGrid');
-
-  // Group by family
-  const caC = profile.courses.filter(c=>c.startsWith('CA'));
-  const cmaC = profile.courses.filter(c=>c.startsWith('CMA'));
-  const csC = profile.courses.filter(c=>c.startsWith('CS'));
-
-  let cards = [];
-
-  function groupProgress(courses) {
-    let total=0, done=0;
-    courses.forEach(course => {
-      Object.keys(CURRICULUM[course].subjects).forEach(sub => {
-        CURRICULUM[course].subjects[sub].forEach(ch => {
-          total++;
-          if (completions[`${course}|${sub}|${ch}`]) done++;
-        });
-      });
-    });
-    return {total, done, pct: total ? Math.round(done/total*100) : 0};
-  }
-
-  if (caC.length) {
-    const p = groupProgress(caC);
-    cards.push(`<div class="kpi kca"><div class="kpi-label">CA Progress</div><div class="kpi-value">${p.pct}%</div><div class="kpi-sub">${p.done}/${p.total} chapters</div></div>`);
-  }
-  if (cmaC.length) {
-    const p = groupProgress(cmaC);
-    cards.push(`<div class="kpi kcma"><div class="kpi-label">CMA Progress</div><div class="kpi-value">${p.pct}%</div><div class="kpi-sub">${p.done}/${p.total} chapters</div></div>`);
-  }
-  if (csC.length) {
-    const p = groupProgress(csC);
-    cards.push(`<div class="kpi kcs"><div class="kpi-label">CS Progress</div><div class="kpi-value">${p.pct}%</div><div class="kpi-sub">${p.done}/${p.total} chapters</div></div>`);
-  }
-
-  // Today
-  const today = new Date().toLocaleDateString('en-IN');
-  const todaySess = sessions.filter(s => s.date===today && s.phaseType==='work');
-  const todayMins = todaySess.reduce((a,s)=>a+parseInt(s.duration||0),0);
-  cards.push(`<div class="kpi ktod"><div class="kpi-label">Today's Study</div><div class="kpi-value">${todayMins>=60?(todayMins/60).toFixed(1)+'h':todayMins+'m'}</div><div class="kpi-sub">${todaySess.length} session${todaySess.length!==1?'s':''} today</div></div>`);
-
-  grid.style.gridTemplateColumns = `repeat(${cards.length}, 1fr)`;
-  grid.innerHTML = cards.join('');
-}
-
-// ===================== DROPDOWNS =====================
-function renderCourseDropdown() {
-  const sel = document.getElementById('courseSel');
-  sel.innerHTML = '<option value="">— Course —</option>';
-  profile.courses.forEach(c => {
-    const o = document.createElement('option');
-    o.value = o.textContent = c;
-    sel.appendChild(o);
-  });
-  selCourse = '';
-}
-
-function bindDropdowns() {
-  document.getElementById('courseSel').onchange = function() {
-    selCourse = this.value; selSub=''; selChap='';
-    const subSel = document.getElementById('subSel');
-    subSel.innerHTML = '<option value="">— Subject —</option>';
-    if (selCourse && CURRICULUM[selCourse]) {
-      Object.keys(CURRICULUM[selCourse].subjects).forEach(s => {
-        const o = document.createElement('option');
-        o.value = o.textContent = s;
-        subSel.appendChild(o);
-      });
-    }
-    document.getElementById('chapSel').innerHTML = '<option value="">— Chapter —</option>';
-  };
-  document.getElementById('subSel').onchange = function() {
-    selSub = this.value; selChap='';
-    const chapSel = document.getElementById('chapSel');
-    chapSel.innerHTML = '<option value="">— Chapter —</option>';
-    if (selCourse && selSub && CURRICULUM[selCourse].subjects[selSub]) {
-      CURRICULUM[selCourse].subjects[selSub].forEach(c => {
-        const o = document.createElement('option');
-        o.value = o.textContent = c;
-        chapSel.appendChild(o);
-      });
-    }
-  };
-  document.getElementById('chapSel').onchange = function() { selChap = this.value; };
-}
-
-// ===================== TIMER =====================
-function startTimer() {
-  if (!selChap) { showToast('⚠️ Select Chapter','Choose Course → Subject → Chapter first!'); return; }
-  if (timerRunning) return;
-  timerRunning = true;
-  document.getElementById('startBtn').disabled = true;
-
-  timerId = setInterval(() => {
-    timerVal--;
-    updateTimerDisplay(); updateRing(); syncPip();
-    if (timerVal <= 0) {
-      clearInterval(timerId); timerId=null; timerRunning=false;
-      document.getElementById('startBtn').disabled=false;
-      logSession();
-      phaseIdx++;
-      if (phaseIdx >= PHASES.length) {
-        phaseIdx=0;
-        showToast('✅ Full Cycle Done!','50-10-50-10-50-20 complete!');
-      } else {
-        timerVal = PHASES[phaseIdx][0]; totalForPhase = PHASES[phaseIdx][0];
-        updateTimerDisplay(); updateRing(); updatePhaseDots();
-        const isBreak = PHASES[phaseIdx][2]==='break';
-        showToast(isBreak?'☕ Break Time':'📖 Work Time', PHASES[phaseIdx][1]);
-        setTimeout(startTimer, 1500);
-      }
-    }
-  }, 1000);
-  updateTimerDisplay(); updatePhaseDots();
-}
-
-function pauseTimer() {
-  if (timerId) { clearInterval(timerId); timerId=null; timerRunning=false; }
-  document.getElementById('startBtn').disabled=false;
-}
-
-function resetTimer() {
-  if (timerId) { clearInterval(timerId); timerId=null; }
-  timerRunning=false; phaseIdx=0; timerVal=PHASES[0][0]; totalForPhase=PHASES[0][0];
-  document.getElementById('startBtn').disabled=false;
-  updateTimerDisplay(); updateRing(); updatePhaseDots();
-}
-
-function updateTimerDisplay() {
-  const m=Math.floor(timerVal/60), s=timerVal%60;
-  const str=`${m}:${s.toString().padStart(2,'0')}`;
-  document.getElementById('timerDisp').textContent=str;
-  document.getElementById('timerPhase').textContent=PHASES[phaseIdx][1];
-  document.title=`${str} — ${PHASES[phaseIdx][1]}`;
-}
-
-function updateRing() {
-  const pct=timerVal/totalForPhase;
-  document.getElementById('ringFill').style.strokeDashoffset = RING_CIRC*(1-pct);
-  document.getElementById('ringFill').className='ring-fill'+(PHASES[phaseIdx][2]==='break'?' brk':'');
-}
-
-function updatePhaseDots() {
-  for (let i=0;i<6;i++) {
-    const d=document.getElementById('dot'+i);
-    d.classList.remove('active','done');
-    if (i<phaseIdx) d.classList.add('done');
-    else if (i===phaseIdx) d.classList.add('active');
-  }
-}
-
-function logSession() {
-  sessions.unshift({
-    date: new Date().toLocaleDateString('en-IN'), ts: Date.now(),
-    course: selCourse, subject: selSub, chapter: selChap,
-    duration: (totalForPhase/60).toFixed(0),
-    phaseType: PHASES[phaseIdx][2], phaseLabel: PHASES[phaseIdx][1]
-  });
-  localStorage.setItem('gk_sessions', JSON.stringify(sessions));
-  renderLog(); renderKPI();
-}
-
-// ===================== LOG =====================
-function renderLog() {
-  const el = document.getElementById('logList');
-  if (!sessions.length) {
-    el.innerHTML='<div class="log-empty"><div class="big">🎯</div>No sessions yet.<br>Start your first Pomodoro!</div>';
-    return;
-  }
-  el.innerHTML = sessions.slice(0,20).map(s => {
-    const cls = COLOR_CLASS[s.course]||'ca';
-    return `<div class="log-item">
-      <div class="log-dot ${cls}"></div>
-      <div><div class="log-subj">${s.subject||s.course}</div><div class="log-chap">${s.chapter} · ${s.phaseLabel||''}</div><div class="log-date">${s.date}</div></div>
-      <div class="log-dur">${s.duration}m</div>
-    </div>`;
-  }).join('');
-}
-
-// ===================== SUBJECTS =====================
-function renderSubjects() {
-  const root = document.getElementById('subjectsRoot');
-
-  // Group by family prefix
-  const groups = { CA:[], CMA:[], CS:[] };
-  profile.courses.forEach(c => {
-    if (c.startsWith('CA')) groups.CA.push(c);
-    else if (c.startsWith('CMA')) groups.CMA.push(c);
-    else if (c.startsWith('CS')) groups.CS.push(c);
-  });
-
-  let html = '';
-  Object.entries(groups).forEach(([fam, courses]) => {
-    if (!courses.length) return;
-    const cls = fam==='CA'?'ca':fam==='CMA'?'cma':'cs';
-    html += `<div class="exam-group"><div class="subjects-grid">`;
-    courses.forEach(course => {
-      Object.keys(CURRICULUM[course].subjects).forEach(sub => {
-        const chapters = CURRICULUM[course].subjects[sub];
-        const done = chapters.filter(ch => completions[`${course}|${sub}|${ch}`]).length;
-        const pct = Math.round(done/chapters.length*100);
-        const chapHTML = chapters.map(ch => {
-          const isDone = !!completions[`${course}|${sub}|${ch}`];
-          return `<div class="chapter-item${isDone?' done':''}" data-course="${course}" data-sub="${sub}" data-ch="${ch}">
-            <div class="chk">${isDone?'✓':''}</div>
-            <div class="chap-name">${ch}</div>
-          </div>`;
-        }).join('');
-
-        html += `<div class="subject-card">
-          <div class="subject-top card-toggle">
-            <div><div class="subject-name">${sub}</div><div style="font-size:0.7rem;color:var(--muted);margin-top:2px">${course}</div></div>
-            <div style="display:flex;align-items:center;gap:4px">
-              <span class="subject-pct ${cls}">${pct}%</span>
-              <span class="expand-icon">▾</span>
-            </div>
-          </div>
-          <div class="prog-bar"><div class="prog-fill ${cls}" style="width:${pct}%"></div></div>
-          <div class="subject-meta">
-            <span class="meta-done">${done}/${chapters.length} chapters</span>
-            <span>${pct===100?'✅ Done':pct>0?'In Progress':'Not started'}</span>
-          </div>
-          <div class="chapters-panel">${chapHTML}</div>
-        </div>`;
-      });
-    });
-    html += `</div></div>`;
-  });
-
-  root.innerHTML = html;
-
-  // Expand toggle
-  root.querySelectorAll('.card-toggle').forEach(el => {
-    el.addEventListener('click', e => {
-      if (e.target.closest('.chapter-item')) return;
-      el.closest('.subject-card').classList.toggle('expanded');
-    });
-  });
-
-  // Chapter tick
-  root.addEventListener('click', e => {
-    const ci = e.target.closest('.chapter-item');
-    if (!ci) return;
-    const {course, sub, ch} = ci.dataset;
-    const key = `${course}|${sub}|${ch}`;
-    completions[key] = !completions[key];
-    localStorage.setItem('gk_completions', JSON.stringify(completions));
-    ci.classList.toggle('done', !!completions[key]);
-    ci.querySelector('.chk').textContent = completions[key]?'✓':'';
-
-    const chapters = CURRICULUM[course].subjects[sub];
-    const done = chapters.filter(c=>completions[`${course}|${sub}|${c}`]).length;
-    const pct = Math.round(done/chapters.length*100);
-    const card = ci.closest('.subject-card');
-    card.querySelector('.subject-pct').textContent = pct+'%';
-    card.querySelector('.prog-fill').style.width = pct+'%';
-    card.querySelector('.meta-done').textContent = `${done}/${chapters.length} chapters`;
-    renderKPI();
-  }, true);
-}
-
-// ===================== PiP =====================
-let pipVisible=false;
-function togglePip() {
-  pipVisible=!pipVisible;
-  document.getElementById('pipEl').classList.toggle('visible',pipVisible);
-  syncPip();
-}
-function syncPip() {
-  const m=Math.floor(timerVal/60), s=timerVal%60;
-  document.getElementById('pipTime').textContent=`${m}:${s.toString().padStart(2,'0')}`;
-  document.getElementById('pipPhase').textContent=PHASES[phaseIdx][1];
-  document.getElementById('pipSub').textContent=selChap?`${selSub} › ${selChap}`:'—';
-}
-
-// ===================== TOAST =====================
-let toastTimer;
-function showToast(title,body) {
-  document.getElementById('toastTitle').textContent=title;
-  document.getElementById('toastBody').textContent=body;
-  const t=document.getElementById('toast');
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),4000);
-}
-
-// ===================== CLEAR =====================
-function clearData() {
-  if (!confirm('Clear ALL sessions and chapter progress?')) return;
-  sessions=[]; completions={};
-  localStorage.removeItem('gk_sessions');
-  localStorage.removeItem('gk_completions');
-  renderLog(); renderKPI(); renderSubjects();
-  showToast('🗑 Cleared','All data removed.');
-}
-
-// ===================== INIT =====================
-if (profile) {
-  selectedCourses = new Set(profile.courses);
-  document.getElementById('nameInput').value = profile.name;
-  document.querySelectorAll('.course-chip').forEach(el => {
-    el.classList.toggle('selected', selectedCourses.has(el.dataset.course));
-  });
-  document.getElementById('setupModal').style.display='none';
-  document.getElementById('mainApp').style.display='block';
-  bootApp();
-}
-</script>
-</body>
+let timerId=null, timerRunning=false, phaseIdx
