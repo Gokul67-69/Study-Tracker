@@ -31,7 +31,6 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
-/* Grid bg */
 body::before{
   content:'';position:fixed;inset:0;
   background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(124,109,250,0.07),transparent);
@@ -61,13 +60,21 @@ body::before{
   padding-bottom:1px;transition:border-color 0.2s;
 }
 .hdr-name .editable-name:hover{border-color:var(--accent);}
-.hdr-sub{font-size:0.82rem;color:var(--muted2);margin-top:0.3rem;display:flex;gap:0.8rem;flex-wrap:wrap;}
+.hdr-sub{font-size:0.82rem;color:var(--muted2);margin-top:0.3rem;display:flex;gap:0.8rem;flex-wrap:wrap;align-items:center;}
 .badge{
   background:rgba(124,109,250,0.12);border:1px solid rgba(124,109,250,0.25);
   color:var(--accent);padding:2px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;
 }
 .badge.g{background:rgba(34,217,160,0.1);border-color:rgba(34,217,160,0.25);color:var(--green);}
 .badge.a{background:rgba(245,166,35,0.1);border-color:rgba(245,166,35,0.25);color:var(--amber);}
+.notif-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:600;cursor:pointer;
+  background:rgba(245,95,87,0.1);border:1px solid rgba(245,95,87,0.3);color:var(--red);
+  transition:all 0.15s;
+}
+.notif-badge.granted{background:rgba(34,217,160,0.1);border-color:rgba(34,217,160,0.3);color:var(--green);}
+.notif-badge:hover{filter:brightness(1.15);}
 .hdr-right{display:flex;gap:0.7rem;flex-wrap:wrap;}
 .icon-btn{
   background:var(--s2);border:1px solid var(--border2);border-radius:10px;
@@ -94,7 +101,7 @@ body::before{
 /* ===== LAYOUT ===== */
 .layout{display:grid;grid-template-columns:1fr 360px;gap:1.2rem;margin-bottom:1.5rem;}
 
-/* ===== POMO CARD ===== */
+/* ===== CARD ===== */
 .card{background:var(--s1);border:1px solid var(--border);border-radius:18px;padding:1.8rem;}
 .card-title{font-size:0.95rem;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.4rem;display:flex;align-items:center;gap:0.5rem;}
 
@@ -137,6 +144,7 @@ body::before{
 .btn-pause{background:rgba(245,95,87,0.15);border:1px solid rgba(245,95,87,0.3);color:var(--red);}
 .btn-reset{background:var(--s2);border:1px solid var(--border2);color:var(--muted2);}
 .btn-pip{background:var(--s2);border:1px solid var(--border2);color:var(--muted2);}
+.btn-pip.active{background:rgba(124,109,250,0.15);border-color:var(--accent);color:var(--accent);}
 
 /* ===== LOG ===== */
 .log-scroll{overflow-y:auto;max-height:390px;padding-right:4px;}
@@ -192,7 +200,6 @@ body::before{
 .subj-meta{font-size:0.7rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center;}
 .subj-acts{display:flex;gap:0.3rem;margin-top:0.7rem;}
 
-/* chapters panel */
 .chap-panel{display:none;margin-top:0.9rem;padding-top:0.9rem;border-top:1px solid var(--border);}
 .subj-card.open .chap-panel{display:block;}
 .chap-item{
@@ -277,7 +284,7 @@ body::before{
 .color-swatch.sel{border-color:#fff;transform:scale(1.2);}
 .color-label{font-size:0.72rem;color:var(--muted);margin-bottom:0.5rem;}
 
-/* ===== PiP ===== */
+/* ===== PiP (inline fallback) ===== */
 .pip{
   position:fixed;top:16px;right:16px;z-index:9999;
   width:230px;background:var(--s1);border:2px solid var(--accent);
@@ -305,7 +312,6 @@ body::before{
 .toast.on{transform:translateY(0);opacity:1;}
 .toast-t{font-weight:700;color:var(--green);margin-bottom:2px;font-size:0.85rem;}
 .toast-b{color:var(--muted2);}
-
 
 /* ===== TODO ===== */
 .todo-card{background:var(--s1);border:1px solid var(--border);border-radius:18px;padding:1.6rem;margin-bottom:1.5rem;}
@@ -348,6 +354,30 @@ body::before{
 .todo-clear{background:none;border:none;color:var(--muted);font-size:0.72rem;cursor:pointer;font-family:var(--font);}
 .todo-clear:hover{color:var(--red);}
 .todo-empty{text-align:center;padding:1.5rem;color:var(--muted);font-size:0.8rem;}
+
+/* ===== DOC-PIP WINDOW STYLES (injected into pip window) ===== */
+#docPipContent{
+  font-family:'Outfit',sans-serif;
+  background:#0e0e14;color:#ebebf5;
+  height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0.5rem;padding:1.2rem;
+  border:2px solid #7c6dfa;border-radius:14px;
+  box-sizing:border-box;
+}
+#docPipContent .pip-time{
+  font-family:'JetBrains Mono',monospace;font-size:3rem;font-weight:700;
+  color:#7c6dfa;line-height:1;
+}
+#docPipContent .pip-time.brk{color:#22d9a0;}
+#docPipContent .pip-phase{font-size:0.65rem;color:#9898b8;text-transform:uppercase;letter-spacing:1px;}
+#docPipContent .pip-sub{font-size:0.72rem;color:#6a6a88;text-align:center;max-width:180px;}
+#docPipContent .pip-p{
+  width:100%;padding:0.5rem;background:rgba(245,95,87,0.12);border:1px solid rgba(245,95,87,0.25);
+  border-radius:7px;color:#f55f57;font-size:0.75rem;font-weight:700;cursor:pointer;
+  font-family:inherit;margin-top:0.3rem;
+}
+#docPipContent .pip-label{font-size:0.6rem;color:#6a6a88;letter-spacing:0.5px;margin-bottom:-0.3rem;}
 
 /* responsive */
 @media(max-width:1050px){.layout{grid-template-columns:1fr;}.kpi-row{grid-template-columns:repeat(2,1fr);}}
@@ -413,7 +443,7 @@ body::before{
         <button class="btn btn-start" id="startBtn" onclick="startTimer()">▶ Start</button>
         <button class="btn btn-pause" onclick="pauseTimer()">⏸ Pause</button>
         <button class="btn btn-reset" onclick="resetTimer()">↺ Reset</button>
-        <button class="btn btn-pip" onclick="togglePip()">🖼 PiP</button>
+        <button class="btn btn-pip" id="pipBtn" onclick="togglePip()">🖼 PiP</button>
       </div>
     </div>
 
@@ -424,7 +454,6 @@ body::before{
       </div>
     </div>
   </div>
-
 
   <!-- TODO -->
   <div class="todo-card">
@@ -446,7 +475,7 @@ body::before{
 
 </div>
 
-<!-- PiP -->
+<!-- PiP (inline fallback when Document PiP not supported) -->
 <div class="pip" id="pipEl">
   <button class="pip-x" onclick="togglePip()">✕</button>
   <div class="pip-time" id="pipT">50:00</div>
@@ -475,11 +504,7 @@ body::before{
 const PALETTE = ['#7c6dfa','#22d9a0','#f5a623','#f55f57','#38bdf8','#e879f9','#fb923c','#a3e635'];
 
 // ==================== DEFAULT DATA ====================
-const DEFAULT_DATA = {
-  userName: 'Your Name',
-  targetYear: '2027',
-  exams: []
-};
+const DEFAULT_DATA = { userName: 'Your Name', targetYear: '2027', exams: [] };
 
 // ==================== STATE ====================
 let state = loadState();
@@ -495,17 +520,48 @@ const PHASES=[
 const CIRC = 2*Math.PI*85;
 let tId=null,tRunning=false,phIdx=0,tVal=PHASES[0][0],tTotal=PHASES[0][0];
 let selExamId='',selSubId='',selChapName='';
-let pipOn=false;
+
+// PiP state
+let docPipWindow = null;   // Document PiP window object
+let pipInline = false;     // inline pip toggle (fallback)
+const HAS_DOC_PIP = 'documentPictureInPicture' in window;
 
 // modal state
 let modalMode='',modalData={};
 let selColor=PALETTE[0];
 
-// ==================== STORAGE ====================
-function loadState(){
-  try{ return JSON.parse(localStorage.getItem('gk4_state'))||structuredClone(DEFAULT_DATA); }
-  catch(e){ return structuredClone(DEFAULT_DATA); }
+// ==================== NOTIFICATIONS ====================
+let notifGranted = Notification.permission === 'granted';
+
+async function requestNotifPermission(){
+  if(Notification.permission === 'granted'){ notifGranted=true; renderHeader(); return; }
+  if(Notification.permission === 'denied'){ toast('🔔 Blocked','Enable notifications in Chrome site settings'); return; }
+  const perm = await Notification.requestPermission();
+  notifGranted = perm === 'granted';
+  renderHeader();
+  if(notifGranted) toast('🔔 Notifications on','You will be alerted when each phase ends');
+  else toast('🔔 Blocked','You can enable later in Chrome site settings');
 }
+
+function sendNotif(title, body, icon='📚'){
+  if(!notifGranted) return;
+  try{
+    const n = new Notification(title, {
+      body,
+      icon: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>${icon}</text></svg>`,
+      badge: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>`,
+      tag: 'study-tracker',
+      renotify: true,
+      requireInteraction: false,
+      silent: false
+    });
+    n.onclick = () => { window.focus(); n.close(); };
+    setTimeout(()=>n.close(), 8000);
+  } catch(e){ console.warn('Notification failed:',e); }
+}
+
+// ==================== STORAGE ====================
+function loadState(){ try{return JSON.parse(localStorage.getItem('gk4_state'))||structuredClone(DEFAULT_DATA);}catch(e){return structuredClone(DEFAULT_DATA);} }
 function saveState(){ localStorage.setItem('gk4_state',JSON.stringify(state)); }
 function loadSessions(){ try{return JSON.parse(localStorage.getItem('gk4_sessions'))||[];}catch(e){return[];} }
 function saveSessions(){ localStorage.setItem('gk4_sessions',JSON.stringify(sessions)); }
@@ -530,37 +586,36 @@ function renderHeader(){
     html += `<span class="badge" style="background:${e.color}22;border-color:${e.color}44;color:${e.color}">${e.name}</span> `;
   });
   html += `<span class="badge a">${state.targetYear||'May 2027'}</span>`;
+
+  // Notification badge
+  const notifState = Notification.permission;
+  if(notifState === 'granted'){
+    html += `<span class="notif-badge granted" onclick="toast('🔔 Active','Desktop notifications are enabled')">🔔 Notifs ON</span>`;
+  } else if(notifState === 'denied'){
+    html += `<span class="notif-badge" onclick="toast('🔕 Blocked','Go to Chrome → Site Settings → Notifications to allow')">🔕 Notifs Blocked</span>`;
+  } else {
+    html += `<span class="notif-badge" onclick="requestNotifPermission()">🔔 Enable Notifs</span>`;
+  }
+
   badges.innerHTML = html;
 }
 
 function renderKPI(){
   const row = document.getElementById('kpiRow');
   let kpis=[];
-
-  // Per-exam progress
   state.exams.slice(0,2).forEach(ex=>{
     let tot=0,done=0;
-    ex.subjects.forEach(s=>{
-      s.chapters.forEach(c=>{
-        tot++;
-        if(completions[`${ex.id}|${s.id}|${c}`]) done++;
-      });
-    });
-    const pct = tot?Math.round(done/tot*100):0;
+    ex.subjects.forEach(s=>{ s.chapters.forEach(c=>{ tot++; if(completions[`${ex.id}|${s.id}|${c}`]) done++; }); });
+    const pct=tot?Math.round(done/tot*100):0;
     kpis.push({label:ex.name, val:pct+'%', sub:`${done}/${tot} chapters`, color:ex.color});
   });
-
-  // Today
   const today=new Date().toLocaleDateString('en-IN');
   const ts=sessions.filter(s=>s.date===today&&s.pt==='w');
   const tm=ts.reduce((a,s)=>a+parseInt(s.dur||0),0);
   kpis.push({label:"Today's Study", val:tm>=60?(tm/60).toFixed(1)+'h':tm+'m', sub:`${ts.length} sessions`, color:'#f5a623'});
-
-  // Total
   const ws=sessions.filter(s=>s.pt==='w');
   const wm=ws.reduce((a,s)=>a+parseInt(s.dur||0),0);
   kpis.push({label:'Total Sessions', val:ws.length, sub:`${Math.round(wm/60)}h total`, color:'#f55f57'});
-
   row.innerHTML = kpis.map(k=>`
     <div class="kpi" style="--kc:${k.color}">
       <div class="kpi-l">${k.label}</div>
@@ -627,9 +682,7 @@ function renderExams(){
   }
   state.exams.forEach(ex=>{
     let tot=0,done=0;
-    ex.subjects.forEach(s=>{
-      s.chapters.forEach(c=>{ tot++; if(completions[`${ex.id}|${s.id}|${c}`]) done++; });
-    });
+    ex.subjects.forEach(s=>{ s.chapters.forEach(c=>{ tot++; if(completions[`${ex.id}|${s.id}|${c}`]) done++; }); });
     const pct=tot?Math.round(done/tot*100):0;
 
     const block=document.createElement('div');
@@ -649,7 +702,6 @@ function renderExams(){
     wrap.appendChild(block);
 
     const grid=document.getElementById(`sg_${ex.id}`);
-
     ex.subjects.forEach(sub=>{
       const chs=sub.chapters;
       const sdone=chs.filter(c=>completions[`${ex.id}|${sub.id}|${c}`]).length;
@@ -693,14 +745,12 @@ function renderExams(){
       grid.appendChild(card);
     });
 
-    // add subject button
     const addBtn=document.createElement('button');
     addBtn.className='add-subj-btn';
     addBtn.textContent='＋ Add Subject';
     addBtn.onclick=()=>openModal('subject',ex.id);
     grid.appendChild(addBtn);
 
-    // chapter toggle delegation
     grid.addEventListener('click',function(e){
       const ci=e.target.closest('.chap-item');
       if(!ci||e.target.closest('.chap-del')) return;
@@ -716,9 +766,7 @@ function renderExams(){
   });
 }
 
-function toggleCard(subId){
-  document.getElementById(`card_${subId}`)?.classList.toggle('open');
-}
+function toggleCard(subId){ document.getElementById(`card_${subId}`)?.classList.toggle('open'); }
 
 function refreshSubjectCard(exId,subId){
   const ex=state.exams.find(e=>e.id===exId);
@@ -745,15 +793,12 @@ function addChapInline(exId,subId){
   sub.chapters.push(val);
   saveState();
   inp.value='';
-  // re-render just this panel
   const panel=document.getElementById(`cp_${subId}`);
   if(panel){
-    const ch=val;
-    const isDone=false;
     const newItem=document.createElement('div');
     newItem.className='chap-item';
-    newItem.dataset.ex=exId; newItem.dataset.sub=subId; newItem.dataset.ch=encodeURIComponent(ch);
-    newItem.innerHTML=`<div class="chk"></div><div class="chap-name">${ch}</div><button class="chap-del" onclick="deleteChapter(event,'${exId}','${subId}','${encodeURIComponent(ch)}')" title="Delete">✕</button>`;
+    newItem.dataset.ex=exId; newItem.dataset.sub=subId; newItem.dataset.ch=encodeURIComponent(val);
+    newItem.innerHTML=`<div class="chk"></div><div class="chap-name">${val}</div><button class="chap-del" onclick="deleteChapter(event,'${exId}','${subId}','${encodeURIComponent(val)}')" title="Delete">✕</button>`;
     panel.insertBefore(newItem,panel.querySelector('.add-chap-row'));
   }
   refreshSubjectCard(exId,subId);
@@ -770,8 +815,7 @@ function deleteChapter(e,exId,subId,chEnc){
   if(!sub) return;
   sub.chapters=sub.chapters.filter(c=>c!==ch);
   delete completions[`${exId}|${subId}|${ch}`];
-  saveState(); saveCompletions();
-  render();
+  saveState(); saveCompletions(); render();
 }
 
 function deleteSubject(exId,subId){
@@ -886,7 +930,6 @@ function openModal(mode, a='', b=''){
 
   overlay.classList.add('show');
   setTimeout(()=>document.getElementById('mIn')?.focus(),100);
-  // Enter key confirm
   setTimeout(()=>{
     const inp=document.getElementById('mIn');
     if(inp) inp.onkeydown=e=>{ if(e.key==='Enter') document.getElementById('modalConfirm').click(); };
@@ -908,8 +951,7 @@ function editName(){
   const v=prompt('Enter your name:',cur);
   if(v&&v.trim()){
     state.userName=v.trim();
-    saveState();
-    renderHeader();
+    saveState(); renderHeader();
     toast('✅ Name updated',v.trim());
   }
 }
@@ -933,6 +975,33 @@ function startTimer(){
       clearInterval(tId); tId=null; tRunning=false;
       document.getElementById('startBtn').disabled=false;
       logSession();
+
+      // ---- NOTIFICATION ----
+      const finishedPhase = PHASES[phIdx];
+      const nextPhaseIdx = (phIdx+1) < PHASES.length ? phIdx+1 : null;
+      const isWork = finishedPhase[2]==='w';
+
+      if(nextPhaseIdx !== null){
+        const nextIsBreak = PHASES[nextPhaseIdx][2]==='b';
+        const nextDur = PHASES[nextPhaseIdx][0]/60;
+        if(isWork){
+          sendNotif(
+            '✅ Work Session Done!',
+            `${finishedPhase[1]} complete. Time for a ${nextDur}-min break! Starting automatically…`,
+            '☕'
+          );
+        } else {
+          sendNotif(
+            '📖 Break Over — Back to Work!',
+            `Break done. ${PHASES[nextPhaseIdx][1]} starting now. Stay focused!`,
+            '🔥'
+          );
+        }
+      } else {
+        sendNotif('🎉 Full Cycle Complete!','All 3 work sessions + breaks done! Incredible session!','🏆');
+      }
+      // ----------------------
+
       phIdx++;
       if(phIdx>=PHASES.length){
         phIdx=0; tVal=PHASES[0][0]; tTotal=PHASES[0][0];
@@ -952,6 +1021,8 @@ function startTimer(){
 
 function pauseTimer(){
   if(tId){ clearInterval(tId); tId=null; tRunning=false; document.getElementById('startBtn').disabled=false; }
+  // also update pip pause btn if pip is open
+  syncPip();
 }
 
 function resetTimer(){
@@ -966,7 +1037,6 @@ function updateTimerUI(){
   document.getElementById('tNum').textContent=str;
   document.getElementById('tPhase').textContent=PHASES[phIdx][1];
   document.title=`${str} — Study Tracker`;
-  // ring
   const pct=tVal/tTotal;
   const offset=CIRC*(1-pct);
   const ring=document.getElementById('ringF');
@@ -998,18 +1068,147 @@ function logSession(){
   saveSessions(); renderLog(); renderKPI();
 }
 
-// ==================== PiP ====================
-function togglePip(){
-  pipOn=!pipOn;
-  document.getElementById('pipEl').classList.toggle('show',pipOn);
-  syncPip();
+// ==================== PiP (Document PiP + inline fallback) ====================
+async function togglePip(){
+  // If Document PiP is supported, use it for true floating window
+  if(HAS_DOC_PIP){
+    if(docPipWindow && !docPipWindow.closed){
+      await docPipWindow.close();
+      docPipWindow = null;
+      document.getElementById('pipBtn').classList.remove('active');
+      document.getElementById('pipBtn').textContent='🖼 PiP';
+      return;
+    }
+    try{
+      docPipWindow = await window.documentPictureInPicture.requestWindow({
+        width: 240,
+        height: 260,
+        disallowReturnToOpener: false
+      });
+
+      // Style the pip window
+      const pipDoc = docPipWindow.document;
+      pipDoc.head.innerHTML=`
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+        <style>
+          *{margin:0;padding:0;box-sizing:border-box;}
+          body{
+            font-family:'Outfit',sans-serif;
+            background:#0a0a10;color:#ebebf5;
+            height:100vh;display:flex;flex-direction:column;
+            align-items:center;justify-content:center;
+            gap:0.5rem;padding:1rem;
+          }
+          .label{font-size:0.58rem;color:#6a6a88;text-transform:uppercase;letter-spacing:1px;}
+          .time{
+            font-family:'JetBrains Mono',monospace;font-size:3.2rem;font-weight:700;
+            color:#7c6dfa;line-height:1;
+          }
+          .time.brk{color:#22d9a0;}
+          .phase{font-size:0.7rem;color:#9898b8;letter-spacing:0.5px;margin-top:2px;}
+          .subinfo{font-size:0.65rem;color:#6a6a88;text-align:center;max-width:190px;line-height:1.4;margin-top:2px;}
+          .dot-row{display:flex;gap:4px;margin-top:6px;}
+          .dot{width:24px;height:4px;border-radius:2px;background:#222230;}
+          .dot.work.on{background:#7c6dfa;}
+          .dot.brk.on{background:#22d9a0;}
+          .dot.done{background:#222230;opacity:0.3;}
+          .pause-btn{
+            margin-top:8px;width:100%;padding:0.5rem;
+            background:rgba(245,95,87,0.12);border:1px solid rgba(245,95,87,0.3);
+            border-radius:8px;color:#f55f57;font-size:0.75rem;font-weight:700;
+            cursor:pointer;font-family:inherit;transition:filter 0.15s;
+          }
+          .pause-btn:hover{filter:brightness(1.2);}
+          .divider{width:100%;height:1px;background:#1c1c2a;margin:2px 0;}
+        </style>
+      `;
+
+      pipDoc.body.innerHTML=`
+        <div class="label">📚 Study Tracker</div>
+        <div class="time" id="pipTime">50:00</div>
+        <div class="phase" id="pipPhase">Work #1</div>
+        <div class="divider"></div>
+        <div class="subinfo" id="pipSub">—</div>
+        <div class="dot-row" id="pipDots"></div>
+        <button class="pause-btn" id="pipPause">⏸ Pause</button>
+      `;
+
+      // Wire up pause button
+      pipDoc.getElementById('pipPause').addEventListener('click',()=>{
+        pauseTimer();
+        pipDoc.getElementById('pipPause').textContent = tRunning ? '⏸ Pause' : '▶ Resume';
+      });
+
+      // Handle pip window being closed by user
+      docPipWindow.addEventListener('pagehide',()=>{
+        docPipWindow=null;
+        document.getElementById('pipBtn').classList.remove('active');
+        document.getElementById('pipBtn').textContent='🖼 PiP';
+      });
+
+      document.getElementById('pipBtn').classList.add('active');
+      document.getElementById('pipBtn').textContent='🖼 PiP ✓';
+      syncPip();
+      toast('🖼 Floating PiP','Timer is now floating — switch apps freely!');
+
+    } catch(err){
+      console.warn('Document PiP failed, falling back to inline:',err);
+      // fallback to inline
+      togglePipInline();
+    }
+  } else {
+    // Fallback: inline pip
+    togglePipInline();
+  }
 }
+
+function togglePipInline(){
+  pipInline=!pipInline;
+  document.getElementById('pipEl').classList.toggle('show',pipInline);
+  document.getElementById('pipBtn').classList.toggle('active',pipInline);
+  if(pipInline){
+    toast('🖼 Inline PiP','Document PiP requires Chrome 116+. Using overlay instead.');
+    syncPip();
+  }
+}
+
 function syncPip(){
   const m=Math.floor(tVal/60),s=tVal%60;
-  document.getElementById('pipT').textContent=`${m}:${s.toString().padStart(2,'0')}`;
+  const str=`${m}:${s.toString().padStart(2,'0')}`;
+  const isBreak = PHASES[phIdx][2]==='b';
+
+  // Inline PiP
+  document.getElementById('pipT').textContent=str;
   document.getElementById('pipPh').textContent=PHASES[phIdx][1];
   const ex=state.exams.find(e=>e.id===selExamId);
-  document.getElementById('pipSub').textContent=selChapName?`${ex?.name||''} › ${selChapName}`:'—';
+  const subLabel=selChapName?`${ex?.name||''} › ${selChapName}`:'—';
+  document.getElementById('pipSub').textContent=subLabel;
+
+  // Document PiP
+  if(docPipWindow && !docPipWindow.closed){
+    const pd=docPipWindow.document;
+    const timeEl=pd.getElementById('pipTime');
+    const phEl=pd.getElementById('pipPhase');
+    const subEl=pd.getElementById('pipSub');
+    const dotsEl=pd.getElementById('pipDots');
+    const pauseEl=pd.getElementById('pipPause');
+
+    if(timeEl){ timeEl.textContent=str; timeEl.className=isBreak?'time brk':'time'; }
+    if(phEl) phEl.textContent=PHASES[phIdx][1];
+    if(subEl) subEl.textContent=subLabel;
+    if(pauseEl) pauseEl.textContent=tRunning?'⏸ Pause':'▶ Resume';
+
+    // Render phase dots
+    if(dotsEl){
+      dotsEl.innerHTML=PHASES.map((ph,i)=>{
+        let cls='dot '+(ph[2]==='w'?'work':'brk');
+        if(i<phIdx) cls+=' done';
+        else if(i===phIdx) cls+=' on';
+        return `<div class="${cls}"></div>`;
+      }).join('');
+    }
+  }
 }
 
 // ==================== TOAST ====================
@@ -1030,7 +1229,6 @@ function clearAll(){
   saveSessions(); saveCompletions();
   render(); toast('🗑 Data cleared','Sessions and progress reset.');
 }
-
 
 // ==================== TODO ====================
 let todos = loadTodos();
@@ -1070,7 +1268,6 @@ function renderTodos(){
     cnt.textContent='0 tasks';
     return;
   }
-  // show undone first, then done
   const sorted=[...todos.filter(t=>!t.done),...todos.filter(t=>t.done)];
   el.innerHTML=sorted.map(t=>`
     <div class="todo-item${t.done?' done-t':''}">
